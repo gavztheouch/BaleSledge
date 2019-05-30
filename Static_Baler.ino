@@ -71,38 +71,36 @@ void loop() {
 
 int buttonState = 0;
 
-void setup()
-{
-  pinMode(2, INPUT);
-  pinMode(13, OUTPUT);
-  pinMode(4, INPUT);
-  pinMode(10, OUTPUT);
-  pinMode(3, INPUT);
-  pinMode(11, OUTPUT);
+void setup() {
+  // put your setup code here, to run once:
+
+pinMode(2, INPUT_PULLUP);
+pinMode(3, INPUT_PULLUP);
+pinMode(4, INPUT_PULLUP);
+pinMode(8, OUTPUT);
+pinMode(9, OUTPUT);
+pinMode(10, OUTPUT);
+
 }
 
-void loop()
-{
-  // read the state of the pushbutton value
-  buttonState = digitalRead(2);
-  // check if pushbutton is pressed.  if it is, the
-  // buttonState is HIGH
-  if (buttonState == HIGH) {
-    // turn LED on
-    digitalWrite(13, LOW);
-    while (digitalRead(4) == LOW) {
-      analogWrite(10, HIGH);
+void loop() {
+  // put your main code here, to run repeatedly:
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+
+buttonState = digitalRead(2);
+if (buttonState == HIGH){
+  digitalWrite(8, HIGH);
+  while (digitalRead(3) == HIGH) {
+    digitalWrite(9, LOW);
     }
-    delay(1000); // Wait for 1000 millisecond(s)
-    analogWrite(10, LOW);
-    while (digitalRead(3) == LOW) {
-      analogWrite(11, HIGH);
-    }
-    delay(1000); // Wait for 1000 millisecond(s)
-    digitalWrite(11, LOW);
-    digitalWrite(13, HIGH);
-  } else {
-    // turn LED off
-    digitalWrite(13, HIGH);
+    digitalWrite(9, HIGH);
+    while (digitalRead(4) == HIGH){
+      digitalWrite(10, LOW);
+      }
+      digitalWrite(10, HIGH);
+      digitalWrite(8, HIGH);
+} else {
+        digitalWrite(8,LOW);
+      }
   }
-}
